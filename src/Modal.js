@@ -1,0 +1,23 @@
+import React, { useEffect, useRef } from "react";
+import { createPortal } from "react-dom";
+
+const Modal = ({ children }) => {
+  const elRef = useRef(null); //default to be null
+  if (!elRef.current) {
+    const div = document.createElement("div");
+    elRef.current = div;
+  }
+
+  //to make a useEfect to act as componentDidUnmount use a return statement
+
+  useEffect(() => {
+    const modalRoot = document.getElementById("modal");
+    modalRoot.appendChild(elRef.current);
+
+    return () => modalRoot.removeChild(elRef.current); //at the end we remove it
+  }, []);
+
+  return createPortal(<div>{children}</div>, elRef.current);
+};
+
+export default Modal;

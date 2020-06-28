@@ -1,7 +1,8 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useContext } from "react";
 import pet, { ANIMALS } from "@frontendmasters/pet";
 import useDropDown from "./useDropdown";
 import Results from "./Results";
+import ThemeContext from "./ThemeContext";
 
 const SearchParams = () => {
   const [location, setLocation] = useState("Seattle, WA");
@@ -9,6 +10,7 @@ const SearchParams = () => {
   const [animal, AnimalDropDown] = useDropDown("Animal", "dog", ANIMALS); //animal api
   const [breed, BreedDropDown, updateBreed] = useDropDown("Breed", "", breeds); //label for select ,state, options
   const [pets, setPets] = useState([]);
+  const [theme, setTheme] = useContext(ThemeContext);
 
   useEffect(() => {
     //based on animal selected we get breeds
@@ -48,7 +50,22 @@ const SearchParams = () => {
         </label>
         <AnimalDropDown />
         <BreedDropDown />
-        <button>Submit</button>
+        <label>
+          Theme
+          <select
+            value={theme}
+            onChange={(e) => setTheme(e.target.value)}
+            onBlur={(e) => setTheme(e.target.value)}
+          >
+            <option value="Blue" defaultValue={true}>
+              Defualt
+            </option>
+            <option value="cyan">Cyan</option>
+            <option value="Red">Red</option>
+            <option value="Brown">Brown</option>
+          </select>
+        </label>
+        <button style={{ background: theme }}>Submit</button>
       </form>
       <Results pets={pets} />
     </div>

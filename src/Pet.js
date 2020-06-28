@@ -1,4 +1,5 @@
 import React, { useEffect } from "react";
+import { Link } from "@reach/router";
 
 const Pet = ({ name, animal, breed, media, id, location }) => {
   let hero = "https://placecorgi.com/300/300";
@@ -6,7 +7,7 @@ const Pet = ({ name, animal, breed, media, id, location }) => {
     hero = media[0].small;
   }
   return (
-    <a href={`/details/${id}`} className="pet">
+    <Link to={`/details/${id}`} className="pet">
       <div className="image-container">
         <img src={hero} alt={name} />
       </div>
@@ -16,7 +17,7 @@ const Pet = ({ name, animal, breed, media, id, location }) => {
           {animal}-{breed}-{location}
         </h2>
       </div>
-    </a>
+    </Link>
   );
 };
 
