@@ -1,14 +1,17 @@
-import React from "react";
+import React, { lazy } from "react";
 import Pet from "@frontendmasters/pet";
 import Carousel from "./Carousel";
 import ErrorBoundary from "./ErrorBoundary";
 import ThemeContext from "./ThemeContext";
 import { navigate } from "@reach/router";
-import Modal from "./Modal";
+//import Modal from "./Modal";
 
 // <pre>
 // <code>{JSON.stringify(props, null, 4)}</code>
 // </pre>
+
+//code spliting for increasing the performance, this will not load the modal in first load
+const Modal = lazy(() => import('./Modal'));
 
 class Details extends React.Component {
   state = {
@@ -78,6 +81,7 @@ class Details extends React.Component {
                 </div>
               </div>
             </Modal>
+
           ) : null}
         </div>
       </div>
