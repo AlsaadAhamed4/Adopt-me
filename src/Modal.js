@@ -9,9 +9,9 @@ const Modal = ({ children }) => {
   }
 
   //to make a useEfect to act as componentDidUnmount use a return statement
-
+  let modalRoot;
   useEffect(() => {
-    const modalRoot = document.getElementById("modal");
+    modalRoot = modalRoot ? modalRoot : document.getElementById("modal");
     modalRoot.appendChild(elRef.current);
 
     return () => modalRoot.removeChild(elRef.current); //at the end we remove it
